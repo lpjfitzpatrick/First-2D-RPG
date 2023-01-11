@@ -23,10 +23,10 @@ public class TileManager
 		m_gp = gp;
 
 		m_aTiles = new Tile[NUM_TILES];
-		m_mapTileNums = new int[m_gp.maxScreenCol][m_gp.maxScreenRow];
+		m_mapTileNums = new int[m_gp.m_maxWorldCol][m_gp.m_maxWorldRow];
 
 		getTileImage();
-		m_mapLoaded = loadMap("../res/maps/TestMap001.txt");
+		m_mapLoaded = loadMap("../res/maps/TestWorld001.txt");
 	}
 
 	public void getTileImage()
@@ -43,6 +43,15 @@ public class TileManager
 
 			m_aTiles[3] = new Tile();
 			m_aTiles[3].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestWater001.png"));
+
+			m_aTiles[4] = new Tile();
+			m_aTiles[4].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestFlower001.png"));
+
+			m_aTiles[5] = new Tile();
+			m_aTiles[5].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestSand001.png"));
+
+			m_aTiles[6] = new Tile();
+			m_aTiles[6].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestEarth001.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -55,11 +64,11 @@ public class TileManager
 			InputStream inStream = getClass().getResourceAsStream(filePath);
 			BufferedReader bufRead = new BufferedReader(new InputStreamReader(inStream));
 
-			for (int row = 0; row < m_gp.maxScreenRow; row++)
+			for (int row = 0; row < m_gp.m_maxWorldRow; row++)
 			{
 				String line = bufRead.readLine();
 				String numbers[] = line.split(" ");
-				for (int col = 0; col < m_gp.maxScreenCol; col++)
+				for (int col = 0; col < m_gp.m_maxWorldCol; col++)
 				{
 					m_mapTileNums[col][row] = Integer.parseInt(numbers[col]);
 				}
