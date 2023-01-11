@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import entity.Player;
+import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable
 {
@@ -23,6 +24,7 @@ public class GamePanel extends JPanel implements Runnable
 	KeyHandler m_keyHand = new KeyHandler();
 	Thread m_gameThread;
 	Player m_player = new Player(this, m_keyHand);
+	TileManager m_tileManager = new TileManager(this);
 
 	// Screen Settings
 	final int originalTileSize = 16; // 16x16 pixel tile size
@@ -88,6 +90,8 @@ public class GamePanel extends JPanel implements Runnable
 		// Make it a graphics 2D class to get access to more stuff (why not just start with a 2D graphics?)
 		Graphics2D g2D = (Graphics2D)g;
 
+		// Draw tiles before player else tiles will hide player
+		m_tileManager.draw(g2D);
 		m_player.draw(g2D);
 
 		// For freeing up memory
