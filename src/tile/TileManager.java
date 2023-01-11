@@ -89,16 +89,25 @@ public class TileManager
 			return;
 		}
 
-		int row = 0, col = 0;
-		for (int xPos = 0; xPos < m_gp.screenWidth; xPos += m_gp.tileSize)
+		int worldRow = 0, worldCol = 0;
+		for (int worldTilePosX = 0; worldTilePosX < m_gp.m_worldWidth; worldTilePosX += m_gp.tileSize)
 		{
-			for (int yPos=0; yPos < m_gp.screenHeight; yPos += m_gp.tileSize)
+			for (int worldTilePosY=0; worldTilePosY < m_gp.m_worldHeight; worldTilePosY += m_gp.tileSize)
 			{
-				g2D.drawImage(m_aTiles[m_mapTileNums[col][row]].m_image, xPos, yPos, m_gp.tileSize, m_gp.tileSize, null);
-				row++;
+				// Only draw tile if it is within our screen box
+				if (worldTilePosX + m_gp.tileSize > (m_gp.m_player.m_worldX - m_gp.m_player.m_screenPosX) &&
+					worldTilePosX - m_gp.tileSize < (m_gp.m_player.m_worldX + m_gp.m_player.m_screenPosX) &&
+					worldTilePosY + m_gp.tileSize > (m_gp.m_player.m_worldY - m_gp.m_player.m_screenPosY) &&
+					worldTilePosY - m_gp.tileSize < (m_gp.m_player.m_worldY + m_gp.m_player.m_screenPosX))
+				{
+					int screenX = worldTilePosX - (int)(m_gp.m_player.m_worldX + 0.5) + (int)(m_gp.m_player.m_screenPosX);
+					int screenY = worldTilePosY - (int)(m_gp.m_player.m_worldY + 0.5) + (int)(m_gp.m_player.m_screenPosY);
+					g2D.drawImage(m_aTiles[m_mapTileNums[worldCol][worldRow]].m_image, screenX, screenY, m_gp.tileSize, m_gp.tileSize, null);
+				}
+				worldRow++;
 			}
-			row = 0;
-			col++;
+			worldRow = 0;
+			worldCol++;
 		}
 
 	}
