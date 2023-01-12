@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Rectangle;
 import java.awt.Graphics2D;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -22,6 +23,8 @@ public class Player extends Entity{
 		// Start position of the player relative to he top left corner of the screen
 		m_screenPosX = m_gp.screenWidth/2 - (m_gp.tileSize/2);
 		m_screenPosY = m_gp.screenHeight/2 - (m_gp.tileSize/2);
+
+		m_solidArea = new Rectangle(8, 16, 3*m_gp.tileSize/4, 3*m_gp.tileSize/4);
 
 		setDefaultValues();
 		getPlayerImage();
