@@ -63,7 +63,7 @@ public class Player extends Entity{
 
 	public void update()
 	{
-		if (m_keyHandler.allMovementKeysPressed()) return;
+		if (!m_keyHandler.isMoving()) return;
 
 		if (m_keyHandler.upPressed && !m_keyHandler.downPressed)
 		{
