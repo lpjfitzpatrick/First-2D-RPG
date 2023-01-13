@@ -24,7 +24,7 @@ public class Player extends Entity{
 		m_screenPosX = m_gp.screenWidth/2 - (m_gp.tileSize/2);
 		m_screenPosY = m_gp.screenHeight/2 - (m_gp.tileSize/2);
 
-		m_solidArea = new Rectangle(8, 16, 3*m_gp.tileSize/4, 3*m_gp.tileSize/4);
+		m_solidArea = new Rectangle(3*m_gp.tileSize/16, m_gp.tileSize/4, 5*m_gp.tileSize/8, 3*m_gp.tileSize/4 - m_gp.tileSize/32);
 
 		setDefaultValues();
 		getPlayerImage();
