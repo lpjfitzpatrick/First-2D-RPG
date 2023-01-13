@@ -11,6 +11,24 @@ public class CollisionDetector
 		m_gp = gp;
 	}
 
+	public void setEntityCollision(Entity entity, int tileNum1, int tileNum2)
+	{
+		if (m_gp.m_tileManager.m_aTiles[tileNum1].m_hasCollision || m_gp.m_tileManager.m_aTiles[tileNum2].m_hasCollision)
+		{
+			entity.m_isColliding = true;
+		}
+	}
+
+	public void setEntityCollision(Entity entity, int tileNum1, int tileNum2, int tileNum3)
+	{
+		if (
+			m_gp.m_tileManager.m_aTiles[tileNum1].m_hasCollision || m_gp.m_tileManager.m_aTiles[tileNum2].m_hasCollision ||
+			m_gp.m_tileManager.m_aTiles[tileNum3].m_hasCollision)
+		{
+			entity.m_isColliding = true;
+		}
+	}
+
 	public void checkTileCollision(Entity entity)
 	{
 		// Coords of the entities collision box in pixel values
@@ -26,7 +44,7 @@ public class CollisionDetector
 		int entityBottomRow = entityBottomWorldY/m_gp.tileSize;
 
 		// Tiles the entity may collide with
-		int tileNum1, tileNum2;
+		int tileNum1, tileNum2, tileNum3;
 
 		// Needs to be modified to handle diagonals
 		switch (entity.m_eDirection)
@@ -35,37 +53,59 @@ public class CollisionDetector
 			entityTopRow = (entityTopWorldY - (int)(entity.m_speed + 0.5))/m_gp.tileSize;
 			tileNum1 = m_gp.m_tileManager.m_mapTileNums[entityLeftCol][entityTopRow];
 			tileNum2 = m_gp.m_tileManager.m_mapTileNums[entityRightCol][entityTopRow];
-			if (m_gp.m_tileManager.m_aTiles[tileNum1].m_hasCollision || m_gp.m_tileManager.m_aTiles[tileNum2].m_hasCollision)
-			{
-				entity.m_isColliding = true;
-			}
+			setEntityCollision(entity, tileNum1, tileNum2);
+			break;
+		case eUpLeft:
+			entityTopRow = (entityTopWorldY - (int)(entity.m_diagonalSpeed + 0.5))/m_gp.tileSize;
+			entityLeftCol = (entityLeftWorldX - (int)(entity.m_diagonalSpeed + 0.5))/m_gp.tileSize;
+			tileNum1 = m_gp.m_tileManager.m_mapTileNums[entityLeftCol][entityTopRow];
+			tileNum2 = m_gp.m_tileManager.m_mapTileNums[entityRightCol][entityTopRow];
+			tileNum3 = m_gp.m_tileManager.m_mapTileNums[entityLeftCol][entityBottomRow];
+			setEntityCollision(entity, tileNum1, tileNum2, tileNum3);
+			break;
+		case eUpRight:
+			entityTopRow = (entityTopWorldY - (int)(entity.m_diagonalSpeed + 0.5))/m_gp.tileSize;
+			entityRightCol = (entityRightWorldX + (int)(entity.m_diagonalSpeed + 0.5))/m_gp.tileSize;
+			tileNum1 = m_gp.m_tileManager.m_mapTileNums[entityLeftCol][entityTopRow];
+			tileNum2 = m_gp.m_tileManager.m_mapTileNums[entityRightCol][entityTopRow];
+			tileNum3 = m_gp.m_tileManager.m_mapTileNums[entityRightCol][entityBottomRow];
+			setEntityCollision(entity, tileNum1, tileNum2, tileNum3);
 			break;
 		case eDown:
 			entityBottomRow = (entityBottomWorldY + (int)(entity.m_speed + 0.5))/m_gp.tileSize;
 			tileNum1 = m_gp.m_tileManager.m_mapTileNums[entityLeftCol][entityBottomRow];
 			tileNum2 = m_gp.m_tileManager.m_mapTileNums[entityRightCol][entityBottomRow];
-			if (m_gp.m_tileManager.m_aTiles[tileNum1].m_hasCollision || m_gp.m_tileManager.m_aTiles[tileNum2].m_hasCollision)
-			{
-				entity.m_isColliding = true;
-			}
+			setEntityCollision(entity, tileNum1, tileNum2);
+			break;
+		case eDownLeft:
+			entityBottomRow = (entityBottomWorldY + (int)(entity.m_diagonalSpeed + 0.5))/m_gp.tileSize;
+			entityLeftCol = (entityLeftWorldX - (int)(entity.m_diagonalSpeed + 0.5))/m_gp.tileSize;
+			tileNum1 = m_gp.m_tileManager.m_mapTileNums[entityLeftCol][entityBottomRow];
+			tileNum2 = m_gp.m_tileManager.m_mapTileNums[entityRightCol][entityBottomRow];
+			tileNum3 = m_gp.m_tileManager.m_mapTileNums[entityLeftCol][entityTopRow];
+			setEntityCollision(entity, tileNum1, tileNum2, tileNum3);
+			break;
+		case eDownRight:
+			entityBottomRow = (entityBottomWorldY + (int)(entity.m_diagonalSpeed + 0.5))/m_gp.tileSize;
+			entityRightCol = (entityRightWorldX + (int)(entity.m_diagonalSpeed + 0.5))/m_gp.tileSize;
+			tileNum1 = m_gp.m_tileManager.m_mapTileNums[entityLeftCol][entityBottomRow];
+			tileNum2 = m_gp.m_tileManager.m_mapTileNums[entityRightCol][entityBottomRow];
+			tileNum3 = m_gp.m_tileManager.m_mapTileNums[entityRightCol][entityTopRow];
+			setEntityCollision(entity, tileNum1, tileNum2, tileNum3);
 			break;
 		case eLeft:
 			entityLeftCol = (entityLeftWorldX - (int)(entity.m_speed + 0.5))/m_gp.tileSize;
 			tileNum1 = m_gp.m_tileManager.m_mapTileNums[entityLeftCol][entityTopRow];
 			tileNum2 = m_gp.m_tileManager.m_mapTileNums[entityLeftCol][entityBottomRow];
-			if (m_gp.m_tileManager.m_aTiles[tileNum1].m_hasCollision || m_gp.m_tileManager.m_aTiles[tileNum2].m_hasCollision)
-			{
-				entity.m_isColliding = true;
-			}
-				break;
+			setEntityCollision(entity, tileNum1, tileNum2);
+			break;
 		case eRight:
 			entityRightCol = (entityRightWorldX + (int)(entity.m_speed + 0.5))/m_gp.tileSize;
 			tileNum1 = m_gp.m_tileManager.m_mapTileNums[entityRightCol][entityTopRow];
 			tileNum2 = m_gp.m_tileManager.m_mapTileNums[entityRightCol][entityBottomRow];
-			if (m_gp.m_tileManager.m_aTiles[tileNum1].m_hasCollision || m_gp.m_tileManager.m_aTiles[tileNum2].m_hasCollision)
-			{
-				entity.m_isColliding = true;
-			}
+			setEntityCollision(entity, tileNum1, tileNum2);
+			break;
+		default:
 			break;
 		}
 	}
