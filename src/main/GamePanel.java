@@ -8,24 +8,18 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import entity.Player;
+import object.AbstractObject;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable
 {
-	public GamePanel()
-	{
-		setPreferredSize(new Dimension(screenWidth, screenHeight));
-		setBackground(Color.black);
-		setDoubleBuffered(true); // Should improve performance with JPanel
-		addKeyListener(m_keyHand);
-		setFocusable(true); // so the game can be focusable to read commands
-	}
-
 	KeyHandler m_keyHand = new KeyHandler();
 	Thread m_gameThread;
 	public Player m_player = new Player(this, m_keyHand);
 	TileManager m_tileManager = new TileManager(this);
 	public CollisionDetector m_collisionDetector = new CollisionDetector(this);
+	public AbstractObject m_objects[] = new AbstractObject[10]; // Total number of objects that can be displayed at once
+	public AssetSetter m_assetSetter = new AssetSetter(this);
 
 	// Screen Settings
 	final int originalTileSize = 16; // 16x16 pixel tile size
@@ -44,6 +38,20 @@ public class GamePanel extends JPanel implements Runnable
 	public final int m_worldHeight = tileSize * m_maxWorldRow;
 
 	public final int FPS = 60;
+
+	public GamePanel()
+	{
+		setPreferredSize(new Dimension(screenWidth, screenHeight));
+		setBackground(Color.black);
+		setDoubleBuffered(true); // Should improve performance with JPanel
+		addKeyListener(m_keyHand);
+		setFocusable(true); // so the game can be focusable to read commands
+	}
+
+	public void setupGame()
+	{
+		m_assetSetter.setAssets();
+	}
 
 	public void startGameThread()
 	{
@@ -88,6 +96,11 @@ public class GamePanel extends JPanel implements Runnable
 	public void update ()
 	{
 		m_player.update();
+		for (AbstractObject obj:m_objects)
+		{
+			if (obj != null)
+				obj.update();
+		}
 	}
 
 	public void paintComponent(Graphics g)
@@ -99,6 +112,11 @@ public class GamePanel extends JPanel implements Runnable
 
 		// Draw tiles before player else tiles will hide player
 		m_tileManager.draw(g2D);
+		for (AbstractObject obj:m_objects)
+		{
+			if (obj != null)
+				obj.draw(g2D, this);
+		}
 		m_player.draw(g2D);
 
 		// For freeing up memory
