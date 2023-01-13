@@ -13,10 +13,9 @@ public class AbstractObject
 	public boolean m_hasCollision;
 	public int m_worldX, m_worldY;
 
+	// This may get some default definition but child class can override anyway
 	public void update()
-	{
-
-	}
+	{}
 
 	public void draw(Graphics2D g2D, GamePanel gp)
 	{
