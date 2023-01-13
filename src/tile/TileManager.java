@@ -12,8 +12,8 @@ import main.GamePanel;
 public class TileManager
 {
 	GamePanel m_gp;
-	Tile[] m_aTiles;
-	int m_mapTileNums[][];
+	public Tile[] m_aTiles;
+	public int m_mapTileNums[][];
 	boolean m_mapLoaded;
 
 	static final int NUM_TILES = 100;
