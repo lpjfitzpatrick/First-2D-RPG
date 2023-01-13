@@ -22,7 +22,11 @@ public class Entity {
 		eUp,
 		eDown,
 		eLeft,
-		eRight
+		eRight,
+		eUpRight,
+		eUpLeft,
+		eDownRight,
+		eDownLeft
 	}
 
 	public BufferedImage walkingSprite(BufferedImage sprite1, BufferedImage sprite2)

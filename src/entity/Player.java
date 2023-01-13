@@ -67,35 +67,79 @@ public class Player extends Entity{
 
 		if (m_keyHandler.upPressed && !m_keyHandler.downPressed)
 		{
-			if ((m_keyHandler.leftPressed || m_keyHandler.rightPressed) && !m_keyHandler.leftAndRightPressed())
+			if (m_keyHandler.leftPressed && !m_keyHandler.rightPressed)
 			{
-				handleDiagonalMove(Direction.eUp, m_diagonalSpeed);
+				m_eDirection = Direction.eUpLeft;
+			}
+			else if (m_keyHandler.rightPressed && !m_keyHandler.leftPressed)
+			{
+				m_eDirection = Direction.eUpRight;
 			}
 			else
 			{
-				handleDiagonalMove(Direction.eUp, m_speed);
+				m_eDirection = Direction.eUp;
 			}
 		}
 		else if (m_keyHandler.downPressed && !m_keyHandler.upPressed)
 		{
-			if ((m_keyHandler.leftPressed || m_keyHandler.rightPressed) && !m_keyHandler.leftAndRightPressed())
+			if (m_keyHandler.leftPressed && !m_keyHandler.rightPressed)
 			{
-				handleDiagonalMove(Direction.eDown, m_diagonalSpeed);
+				m_eDirection = Direction.eDownLeft;
+			}
+			else if (m_keyHandler.rightPressed && !m_keyHandler.leftPressed)
+			{
+				m_eDirection = Direction.eDownRight;
 			}
 			else
 			{
-				handleDiagonalMove(Direction.eDown, m_speed);
+				m_eDirection = Direction.eDown;
 			}
 		}
 		else if (m_keyHandler.leftPressed && !m_keyHandler.rightPressed)
 		{
-			m_worldX -= m_speed;
 			m_eDirection = Direction.eLeft;
 		}
 		else if (m_keyHandler.rightPressed && !m_keyHandler.leftPressed)
 		{
-			m_worldX += m_speed;
 			m_eDirection = Direction.eRight;
+		}
+
+		m_isColliding = false;
+		m_gp.m_collisionDetector.checkTileCollision(this);
+
+		if (!m_isColliding)
+		{
+			switch(m_eDirection)
+			{
+			case eUp:
+				m_worldY -= m_speed;
+				break;
+			case eUpLeft:
+				m_worldY -= m_diagonalSpeed;
+				m_worldX -= m_diagonalSpeed;
+				break;
+			case eUpRight:
+				m_worldY -= m_diagonalSpeed;
+				m_worldX += m_diagonalSpeed;
+				break;
+			case eDown:
+				m_worldY += m_speed;
+				break;
+			case eDownLeft:
+				m_worldY += m_diagonalSpeed;
+				m_worldX -= m_diagonalSpeed;
+				break;
+			case eDownRight:
+				m_worldY += m_diagonalSpeed;
+				m_worldX += m_diagonalSpeed;
+				break;
+			case eLeft:
+				m_worldX -= m_speed;
+				break;
+			case eRight:
+				m_worldX += m_speed;
+				break;
+			}
 		}
 
 		m_spriteFrameCount++;
@@ -119,6 +163,8 @@ public class Player extends Entity{
 
 		switch (m_eDirection)
 		{
+		case eUpLeft:
+		case eUpRight:
 		case eUp:
 			if (m_keyHandler.isMoving())
 			{
@@ -129,6 +175,8 @@ public class Player extends Entity{
 				image = m_upNeutral;
 			}
 			break;
+		case eDownLeft:
+		case eDownRight:
 		case eDown:
 			if (m_keyHandler.isMoving())
 			{
@@ -159,6 +207,8 @@ public class Player extends Entity{
 				image = m_rightNeutral;
 			}
 			break;
+		default:
+			break;
 		}
 
 		g2D.drawImage(image, (int)(m_screenPosX + 0.5), (int)(m_screenPosY + 0.5), m_gp.tileSize, m_gp.tileSize, null);
@@ -171,29 +221,5 @@ public class Player extends Entity{
 		double pixelsPerFrame = m_speed/m_gp.FPS;
 		double reducedDistance = pixelsPerFrame/Math.sqrt(2);
 		m_diagonalSpeed = reducedDistance*m_gp.FPS;
-	}
-
-	private void handleDiagonalMove(Direction eDirection, double speed)
-	{
-		m_eDirection = eDirection;
-		if (m_eDirection == Direction.eUp)
-		{
-			m_worldY -= speed;
-		}
-		else if (m_eDirection == Direction.eDown)
-		{
-			m_worldY += speed;
-		}
-
-		if (m_keyHandler.leftAndRightPressed()) return;
-
-		if (m_keyHandler.leftPressed)
-		{
-			m_worldX -= m_diagonalSpeed;
-		}
-		else if (m_keyHandler.rightPressed)
-		{
-			m_worldX += m_diagonalSpeed;
-		}
 	}
 }

@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable
 	Thread m_gameThread;
 	public Player m_player = new Player(this, m_keyHand);
 	TileManager m_tileManager = new TileManager(this);
+	public CollisionDetector m_collisionDetector = new CollisionDetector(this);
 
 	// Screen Settings
 	final int originalTileSize = 16; // 16x16 pixel tile size
