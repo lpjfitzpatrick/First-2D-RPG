@@ -1,6 +1,9 @@
 package main;
 
 import entity.Entity;
+import object.AbstractObject;
+
+import java.awt.Rectangle;
 
 public class CollisionDetector
 {
@@ -107,6 +110,89 @@ public class CollisionDetector
 			break;
 		default:
 			break;
+		}
+	}
+
+	public void checkObjectCollision(Entity entity)
+	{
+		for(AbstractObject obj:m_gp.m_objects)
+		{
+			if (obj != null && obj.isOnScreen() && obj.hasCollision())
+			{
+				Rectangle entitySolidArea = (Rectangle)entity.getSolidArea().clone();
+				entitySolidArea.x = (int)(entity.m_worldX + 0.5) + entity.getSolidArea().x;
+				entitySolidArea.y = (int)(entity.m_worldY + 0.5) + entity.getSolidArea().y;
+
+				Rectangle objectSolidArea = (Rectangle)obj.getSolidArea().clone();
+				objectSolidArea.x = obj.getWorldX() + obj.getSolidArea().x;
+				objectSolidArea.y = obj.getWorldY() + obj.getSolidArea().y;
+
+				switch (entity.m_eDirection)
+				{
+				case eUp:
+					entitySolidArea.y -= entity.m_speed;
+					if (entitySolidArea.intersects(objectSolidArea))
+					{
+						entity.m_isColliding = true;
+					}
+					break;
+				case eUpLeft:
+					entitySolidArea.y -= entity.m_diagonalSpeed;
+					entitySolidArea.x -= entity.m_diagonalSpeed;
+					if (entitySolidArea.intersects(objectSolidArea))
+					{
+						entity.m_isColliding = true;
+					}
+					break;
+				case eUpRight:
+					entitySolidArea.y -= entity.m_diagonalSpeed;
+					entitySolidArea.x += entity.m_diagonalSpeed;
+					if (entitySolidArea.intersects(objectSolidArea))
+					{
+						entity.m_isColliding = true;
+					}
+					break;
+				case eDown:
+					entitySolidArea.y += entity.m_speed;
+					if (entitySolidArea.intersects(objectSolidArea))
+					{
+						entity.m_isColliding = true;
+					}
+					break;
+				case eDownLeft:
+					entitySolidArea.y += entity.m_diagonalSpeed;
+					entitySolidArea.x -= entity.m_diagonalSpeed;
+					if (entitySolidArea.intersects(objectSolidArea))
+					{
+						entity.m_isColliding = true;
+					}
+					break;
+				case eDownRight:
+					entitySolidArea.y += entity.m_diagonalSpeed;
+					entitySolidArea.x += entity.m_diagonalSpeed;
+					if (entitySolidArea.intersects(objectSolidArea))
+					{
+						entity.m_isColliding = true;
+					}
+					break;
+				case eLeft:
+					entitySolidArea.x -= entity.m_speed;
+					if (entitySolidArea.intersects(objectSolidArea))
+					{
+						entity.m_isColliding = true;
+					}
+					break;
+				case eRight:
+					entitySolidArea.x += entity.m_speed;
+					if (entitySolidArea.intersects(objectSolidArea))
+					{
+						entity.m_isColliding = true;
+					}
+					break;
+				default:
+					break;
+				}
+			}
 		}
 	}
 }

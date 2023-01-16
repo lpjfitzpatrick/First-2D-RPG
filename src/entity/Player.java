@@ -106,6 +106,7 @@ public class Player extends Entity{
 
 		m_isColliding = false;
 		m_gp.m_collisionDetector.checkTileCollision(this);
+		m_gp.m_collisionDetector.checkObjectCollision(this);
 
 		if (!m_isColliding)
 		{
