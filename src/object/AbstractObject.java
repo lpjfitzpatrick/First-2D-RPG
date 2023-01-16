@@ -1,10 +1,10 @@
 package object;
 
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
+import java.awt.Graphics2D;
 
 import main.GamePanel;
-
-import java.awt.Graphics2D;
 
 public class AbstractObject
 {
@@ -12,6 +12,23 @@ public class AbstractObject
 	public String m_name;
 	public boolean m_hasCollision;
 	public int m_worldX, m_worldY;
+	public int m_coordX, m_coordY; // tile cords like 15,25
+	public int m_tileSize;
+
+	public Rectangle m_solidArea;
+
+	AbstractObject(int tileSize, int coordX, int coordY)
+	{
+		m_coordX = coordX;
+		m_coordY = coordY;
+		m_tileSize = tileSize;
+		m_worldX = coordX*tileSize;
+		m_worldY = coordY*tileSize;
+		updateParams();
+	}
+
+	public void updateParams()
+	{}
 
 	// This may get some default definition but child class can override anyway
 	public void update()
