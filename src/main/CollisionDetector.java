@@ -11,7 +11,7 @@ public class CollisionDetector
 		m_gp = gp;
 	}
 
-	public void setEntityCollision(Entity entity, int tileNum1, int tileNum2)
+	private void setEntityCollision(Entity entity, int tileNum1, int tileNum2)
 	{
 		if (m_gp.m_tileManager.m_aTiles[tileNum1].m_hasCollision || m_gp.m_tileManager.m_aTiles[tileNum2].m_hasCollision)
 		{
@@ -19,7 +19,7 @@ public class CollisionDetector
 		}
 	}
 
-	public void setEntityCollision(Entity entity, int tileNum1, int tileNum2, int tileNum3)
+	private void setEntityCollision(Entity entity, int tileNum1, int tileNum2, int tileNum3)
 	{
 		if (
 			m_gp.m_tileManager.m_aTiles[tileNum1].m_hasCollision || m_gp.m_tileManager.m_aTiles[tileNum2].m_hasCollision ||
@@ -32,10 +32,10 @@ public class CollisionDetector
 	public void checkTileCollision(Entity entity)
 	{
 		// Coords of the entities collision box in pixel values
-		int entityLeftWorldX = (int)(entity.m_worldX + 0.5) + entity.m_solidArea.x;
-		int entityRightWorldX = (int)(entity.m_worldX + 0.5) + entity.m_solidArea.x + entity.m_solidArea.width;
-		int entityTopWorldY = (int)(entity.m_worldY + 0.5) + entity.m_solidArea.y;
-		int entityBottomWorldY = (int)(entity.m_worldY + 0.5) + entity.m_solidArea.y + entity.m_solidArea.height;
+		int entityLeftWorldX = (int)(entity.m_worldX + 0.5) + entity.getSolidArea().x;
+		int entityRightWorldX = (int)(entity.m_worldX + 0.5) + entity.getSolidArea().x + entity.getSolidArea().width;
+		int entityTopWorldY = (int)(entity.m_worldY + 0.5) + entity.getSolidArea().y;
+		int entityBottomWorldY = (int)(entity.m_worldY + 0.5) + entity.getSolidArea().y + entity.getSolidArea().height;
 
 		// Coords of the entities collision box in row/col
 		int entityLeftCol = entityLeftWorldX/m_gp.tileSize;
