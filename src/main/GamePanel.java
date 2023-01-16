@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable
 
 	KeyHandler m_keyHand = new KeyHandler();
 	Thread m_gameThread;
-	Player m_player = new Player(this, m_keyHand);
+	public Player m_player = new Player(this, m_keyHand);
 	TileManager m_tileManager = new TileManager(this);
 
 	// Screen Settings
@@ -31,10 +31,16 @@ public class GamePanel extends JPanel implements Runnable
 	final int scale = 4; // scale since screen resolution of modern monitors is much larger
 
 	public final int tileSize = originalTileSize * scale; // 64x64 pixel tile size
-	public final int maxScreenCol = 20;
-	public final int maxScreenRow = 15;
+	final int maxScreenCol = 20;
+	final int maxScreenRow = 15;
 	public final int screenWidth = tileSize * maxScreenCol;
 	public final int screenHeight = tileSize * maxScreenRow;
+
+	// World settings
+	public final int m_maxWorldCol = 50;
+	public final int m_maxWorldRow = 50;
+	public final int m_worldWidth = tileSize * m_maxWorldCol;
+	public final int m_worldHeight = tileSize * m_maxWorldRow;
 
 	public final int FPS = 60;
 
