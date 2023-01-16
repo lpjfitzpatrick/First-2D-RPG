@@ -12,10 +12,16 @@ public class Player extends Entity{
 	GamePanel m_gp;
 	KeyHandler m_keyHandler;
 
+	public final double m_screenPosX;
+	public final double m_screenPosY;
+
 	public Player(GamePanel gp, KeyHandler keyHandler)
 	{
 		m_gp = gp;
 		m_keyHandler = keyHandler;
+		// Start position of the player relative to he top left corner of the screen
+		m_screenPosX = m_gp.screenWidth/2 - (m_gp.tileSize/2);
+		m_screenPosY = m_gp.screenHeight/2 - (m_gp.tileSize/2);
 
 		setDefaultValues();
 		getPlayerImage();
@@ -23,8 +29,9 @@ public class Player extends Entity{
 
 	public void setDefaultValues()
 	{
-		m_x = 100;
-		m_y = 100;
+		// Starting position of player relative to top left corner of world map
+		m_worldX = m_gp.tileSize * 23;
+		m_worldY = m_gp.tileSize * 21;
 		m_speed = 4;
 		m_spriteSwapInterval = 15;
 		computeDiagonalSpeed();
@@ -79,12 +86,12 @@ public class Player extends Entity{
 		}
 		else if (m_keyHandler.leftPressed && !m_keyHandler.rightPressed)
 		{
-			m_x -= m_speed;
+			m_worldX -= m_speed;
 			m_eDirection = Direction.eLeft;
 		}
 		else if (m_keyHandler.rightPressed && !m_keyHandler.leftPressed)
 		{
-			m_x += m_speed;
+			m_worldX += m_speed;
 			m_eDirection = Direction.eRight;
 		}
 
@@ -151,7 +158,7 @@ public class Player extends Entity{
 			break;
 		}
 
-		g2D.drawImage(image, (int)(m_x + 0.5), (int)(m_y + 0.5), m_gp.tileSize, m_gp.tileSize, null);
+		g2D.drawImage(image, (int)(m_screenPosX + 0.5), (int)(m_screenPosY + 0.5), m_gp.tileSize, m_gp.tileSize, null);
 	}
 
 	private void computeDiagonalSpeed()
@@ -168,22 +175,22 @@ public class Player extends Entity{
 		m_eDirection = eDirection;
 		if (m_eDirection == Direction.eUp)
 		{
-			m_y -= speed;
+			m_worldY -= speed;
 		}
 		else if (m_eDirection == Direction.eDown)
 		{
-			m_y += speed;
+			m_worldY += speed;
 		}
 
 		if (m_keyHandler.leftAndRightPressed()) return;
 
 		if (m_keyHandler.leftPressed)
 		{
-			m_x -= m_diagonalSpeed;
+			m_worldX -= m_diagonalSpeed;
 		}
 		else if (m_keyHandler.rightPressed)
 		{
-			m_x += m_diagonalSpeed;
+			m_worldX += m_diagonalSpeed;
 		}
 	}
 }
