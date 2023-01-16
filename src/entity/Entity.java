@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Entity {
@@ -14,11 +15,18 @@ public class Entity {
 	public int m_spriteFrameCount;
 	public int m_spriteSwapInterval;
 
+	public Rectangle m_solidArea;
+	public boolean m_isColliding;
+
 	public enum Direction {
 		eUp,
 		eDown,
 		eLeft,
-		eRight
+		eRight,
+		eUpRight,
+		eUpLeft,
+		eDownRight,
+		eDownLeft
 	}
 
 	public BufferedImage walkingSprite(BufferedImage sprite1, BufferedImage sprite2)

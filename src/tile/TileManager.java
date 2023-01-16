@@ -12,8 +12,8 @@ import main.GamePanel;
 public class TileManager
 {
 	GamePanel m_gp;
-	Tile[] m_aTiles;
-	int m_mapTileNums[][];
+	public Tile[] m_aTiles;
+	public int m_mapTileNums[][];
 	boolean m_mapLoaded;
 
 	static final int NUM_TILES = 100;
@@ -38,13 +38,13 @@ public class TileManager
 			m_aTiles[1] = new Tile();
 			m_aTiles[1].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestGrass002.png"));
 
-			m_aTiles[2] = new Tile();
+			m_aTiles[2] = new Tile(true);
 			m_aTiles[2].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestWall001.png"));
 
-			m_aTiles[3] = new Tile();
+			m_aTiles[3] = new Tile(true);
 			m_aTiles[3].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestWater001.png"));
 
-			m_aTiles[4] = new Tile();
+			m_aTiles[4] = new Tile(true);
 			m_aTiles[4].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestFlower001.png"));
 
 			m_aTiles[5] = new Tile();
