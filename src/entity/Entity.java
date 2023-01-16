@@ -15,7 +15,7 @@ public class Entity {
 	public int m_spriteFrameCount;
 	public int m_spriteSwapInterval;
 
-	public Rectangle m_solidArea;
+	Rectangle m_solidArea;
 	public boolean m_isColliding;
 
 	public enum Direction {
@@ -28,6 +28,8 @@ public class Entity {
 		eDownRight,
 		eDownLeft
 	}
+
+	public Rectangle getSolidArea() { return m_solidArea; }
 
 	public BufferedImage walkingSprite(BufferedImage sprite1, BufferedImage sprite2)
 	{
