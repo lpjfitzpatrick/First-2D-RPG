@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import java.awt.Graphics2D;
 
+import entity.Entity;
 import main.GamePanel;
 
 public class AbstractObject
@@ -36,12 +37,9 @@ public class AbstractObject
 	public boolean hasCollision() { return m_hasCollision; }
 	public boolean isOnScreen() { return m_isOnScreen; }
 
-	public void updateParams()
-	{}
-
-	// This may get some default definition but child class can override anyway
-	public void update()
-	{}
+	public void collisionAction(Entity entity) {}
+	public void updateParams() {}
+	public void update() {}
 
 	public void draw(Graphics2D g2D, GamePanel gp)
 	{
