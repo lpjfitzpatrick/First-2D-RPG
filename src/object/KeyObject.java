@@ -39,4 +39,13 @@ public class KeyObject extends InventoryObject
 			}
 		}
 	}
+
+	@Override
+	public void update()
+	{
+		if (m_eItemState == ItemState.eInInventory)
+		{
+			m_removeFromGamePanel = true;
+		}
+	}
 }
