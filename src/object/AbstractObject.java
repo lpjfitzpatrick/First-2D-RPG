@@ -20,6 +20,8 @@ public class AbstractObject
 
 	protected Rectangle m_solidArea;
 
+	AbstractObject() {}
+
 	AbstractObject(int tileSize, int coordX, int coordY)
 	{
 		m_coordX = coordX;

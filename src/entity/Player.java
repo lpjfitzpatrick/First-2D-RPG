@@ -20,6 +20,8 @@ public class Player extends Entity
 	public final double m_screenPosX;
 	public final double m_screenPosY;
 
+	public ArrayList<InventoryObject> getInventory() { return m_inventory; }
+
 	public Player(GamePanel gp, KeyHandler keyHandler)
 	{
 		m_gp = gp;
@@ -232,5 +234,10 @@ public class Player extends Entity
 	public boolean addToInventory(InventoryObject item)
 	{
 		return m_inventory.add(item);
+	}
+
+	public boolean removeFromInventory(InventoryObject item)
+	{
+		return m_inventory.remove(item);
 	}
 }
