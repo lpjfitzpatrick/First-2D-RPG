@@ -1,6 +1,7 @@
 package main;
 
 import object.KeyObject;
+import object.InventoryObject.ItemState;
 import object.ChestObject;
 import object.DoorObject;
 
@@ -15,13 +16,13 @@ public class AssetSetter
 
 	public void setAssets()
 	{
-		KeyObject key0 = new KeyObject(m_gp.tileSize, 23, 7);
+		KeyObject key0 = new KeyObject(m_gp.tileSize, 23, 7, ItemState.eOnGround);
 		m_gp.m_objects[0] = key0;
 
-		KeyObject key1 = new KeyObject(m_gp.tileSize, 23, 40);
+		KeyObject key1 = new KeyObject(m_gp.tileSize, 23, 40, ItemState.eOnGround);
 		m_gp.m_objects[1] = key1;
 
-		KeyObject key2 = new KeyObject(m_gp.tileSize, 38, 8);
+		KeyObject key2 = new KeyObject(m_gp.tileSize, 38, 8, ItemState.eOnGround);
 		m_gp.m_objects[2] = key2;
 
 		DoorObject door1 = new DoorObject(m_gp.tileSize, 10, 11);
