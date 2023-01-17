@@ -98,10 +98,15 @@ public class GamePanel extends JPanel implements Runnable
 	public void update ()
 	{
 		m_player.update();
-		for (AbstractObject obj:m_objects)
+		Iterator<AbstractObject> it = m_objects.iterator();
+		while (it.hasNext())
 		{
-			if (obj != null)
+			AbstractObject obj = it.next();
+			if (obj != null && obj.isOnScreen())
+			{
 				obj.update();
+				if (obj.removeFromGamePanel()) it.remove();
+			}
 		}
 	}
 

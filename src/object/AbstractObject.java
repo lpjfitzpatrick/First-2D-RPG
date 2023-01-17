@@ -16,6 +16,7 @@ public class AbstractObject
 	int m_worldX, m_worldY;
 	int m_coordX, m_coordY; // tile cords like 15,25
 	int m_tileSize;
+	boolean m_removeFromGamePanel = false;
 
 	protected Rectangle m_solidArea;
 
@@ -36,6 +37,7 @@ public class AbstractObject
 	public Rectangle getSolidArea() { return m_solidArea; }
 	public boolean hasCollision() { return m_hasCollision; }
 	public boolean isOnScreen() { return m_isOnScreen; }
+	public boolean removeFromGamePanel() { return m_removeFromGamePanel; }
 
 	public void collisionAction(Entity entity) {}
 	public void updateParams() {}
