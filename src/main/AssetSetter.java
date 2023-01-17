@@ -2,6 +2,7 @@ package main;
 
 import object.KeyObject;
 import object.InventoryObject.ItemState;
+import object.OpenableObject.OpenableObjectState;
 import object.ChestObject;
 import object.DoorObject;
 
@@ -25,13 +26,13 @@ public class AssetSetter
 		KeyObject key2 = new KeyObject(m_gp.tileSize, 38, 8, ItemState.eOnGround);
 		m_gp.addObjectToMap(key2);
 
-		DoorObject door1 = new DoorObject(m_gp.tileSize, 10, 11);
+		DoorObject door1 = new DoorObject(m_gp.tileSize, 10, 11, OpenableObjectState.eClosed);
 		m_gp.addObjectToMap(door1);
 
-		DoorObject door2 = new DoorObject(m_gp.tileSize, 8, 28);
+		DoorObject door2 = new DoorObject(m_gp.tileSize, 8, 28, OpenableObjectState.eClosed);
 		m_gp.addObjectToMap(door2);
 
-		DoorObject door3 = new DoorObject(m_gp.tileSize, 12, 22);
+		DoorObject door3 = new DoorObject(m_gp.tileSize, 12, 22, OpenableObjectState.eClosed);
 		m_gp.addObjectToMap(door3);
 
 		ChestObject chest1 = new ChestObject(m_gp.tileSize, 10, 7);
