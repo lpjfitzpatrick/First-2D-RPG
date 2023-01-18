@@ -3,6 +3,7 @@ package main;
 import object.KeyObject;
 import object.InventoryObject.ItemState;
 import object.OpenableObject.OpenableObjectState;
+import object.BootsOfSpeedObject;
 import object.ChestObject;
 import object.DoorObject;
 
@@ -37,5 +38,8 @@ public class AssetSetter
 
 		ChestObject chest1 = new ChestObject(m_gp.tileSize, 10, 7);
 		m_gp.addObjectToMap(chest1);
+
+		BootsOfSpeedObject bootsOfSpeed = new BootsOfSpeedObject(m_gp.tileSize, 36, 40, ItemState.eOnGround);
+		m_gp.addObjectToMap(bootsOfSpeed);
 	}
 }

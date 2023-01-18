@@ -240,4 +240,10 @@ public class Player extends Entity
 	{
 		return m_inventory.remove(item);
 	}
+
+	public void addToSpeed(double bonusSpeed)
+	{
+		m_speed += bonusSpeed;
+		computeDiagonalSpeed();
+	}
 }
