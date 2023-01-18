@@ -5,35 +5,40 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener
 {
-	public boolean upPressed, downPressed, leftPressed, rightPressed;
+	private boolean m_upPressed, m_downPressed, m_leftPressed, m_rightPressed;
+
+	public boolean upPressed() { return m_upPressed; }
+	public boolean downPressed() { return m_downPressed; }
+	public boolean leftPressed() { return m_leftPressed; }
+	public boolean rightPressed() { return m_rightPressed; }
 
 	public boolean leftAndRightPressed()
 	{
-		return leftPressed && rightPressed;
+		return m_leftPressed && m_rightPressed;
 	}
 
 	public boolean upAndDownPressed()
 	{
-		return upPressed && downPressed;
+		return m_upPressed && m_downPressed;
 	}
 
 	public boolean allMovementKeysPressed()
 	{
-		return upPressed && downPressed && leftPressed && rightPressed;
+		return m_upPressed && m_downPressed && m_leftPressed && m_rightPressed;
 	}
 
 	private boolean noMovementKeysPressed()
 	{
-		return !upPressed && !downPressed && !leftPressed && !rightPressed;
+		return !m_upPressed && !m_downPressed && !m_leftPressed && !m_rightPressed;
 	}
 
 	public boolean isMoving()
 	{
 		if (allMovementKeysPressed() || noMovementKeysPressed()) return false;
 
-		if (upAndDownPressed() && (!leftPressed && !rightPressed)) return false;
+		if (upAndDownPressed() && (!m_leftPressed && !m_rightPressed)) return false;
 
-		if (leftAndRightPressed() && (!upPressed && !downPressed)) return false;
+		if (leftAndRightPressed() && (!m_upPressed && !m_downPressed)) return false;
 
 		return true;
 	}
@@ -50,20 +55,20 @@ public class KeyHandler implements KeyListener
 
 		if (code == KeyEvent.VK_W)
 		{
-			upPressed = true;
+			m_upPressed = true;
 		}
 		if (code == KeyEvent.VK_S)
 		{
-			downPressed = true;
+			m_downPressed = true;
 
 		}
 		if (code == KeyEvent.VK_A)
 		{
-			leftPressed = true;
+			m_leftPressed = true;
 		}
 		if (code == KeyEvent.VK_D)
 		{
-			rightPressed = true;
+			m_rightPressed = true;
 		}
 	}
 
@@ -74,19 +79,19 @@ public class KeyHandler implements KeyListener
 
 		if (code == KeyEvent.VK_W)
 		{
-			upPressed = false;
+			m_upPressed = false;
 		}
 		if (code == KeyEvent.VK_S)
 		{
-			downPressed = false;
+			m_downPressed = false;
 		}
 		if (code == KeyEvent.VK_A)
 		{
-			leftPressed = false;
+			m_leftPressed = false;
 		}
 		if (code == KeyEvent.VK_D)
 		{
-			rightPressed = false;
+			m_rightPressed = false;
 		}
 	}
 

@@ -2,7 +2,7 @@ package object;
 
 public class OpenableObject extends AbstractObject
 {
-	OpenableObjectState m_eObjectState;
+	protected OpenableObjectState m_eObjectState;
 
 	public enum OpenableObjectState
 	{

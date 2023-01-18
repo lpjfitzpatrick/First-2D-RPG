@@ -12,7 +12,7 @@ public class ChestObject extends AbstractObject
 	}
 
 	@Override
-	public void updateParams()
+	protected void updateParams()
 	{
 		m_name = "Chest";
 		m_hasCollision = true;

@@ -9,16 +9,16 @@ import main.GamePanel;
 
 public class AbstractObject
 {
-	public BufferedImage m_image;
+	BufferedImage m_image;
 	String m_name;
 	boolean m_hasCollision;
 	boolean m_isOnScreen;
-	int m_worldX, m_worldY;
-	int m_coordX, m_coordY; // tile cords like 15,25
+	private int m_worldX, m_worldY;
+	private int m_coordX, m_coordY; // tile cords like 15,25
 	int m_tileSize;
 	boolean m_removeFromGamePanel = false;
 
-	protected Rectangle m_solidArea;
+	Rectangle m_solidArea;
 
 	AbstractObject() {}
 
@@ -42,20 +42,20 @@ public class AbstractObject
 	public boolean removeFromGamePanel() { return m_removeFromGamePanel; }
 
 	public void collisionAction(Entity entity) {}
-	public void updateParams() {}
 	public void update() {}
+	protected void updateParams() {}
 
 	public void draw(Graphics2D g2D, GamePanel gp)
 	{
 		// Only draw object if it's within our screen box
-		if (m_worldX + gp.tileSize > (gp.m_player.m_worldX - gp.m_player.m_screenPosX) &&
-			m_worldX - gp.tileSize < (gp.m_player.m_worldX + gp.m_player.m_screenPosX) &&
-			m_worldY + gp.tileSize > (gp.m_player.m_worldY - gp.m_player.m_screenPosY) &&
-			m_worldY - gp.tileSize < (gp.m_player.m_worldY + gp.m_player.m_screenPosX))
+		if (m_worldX + gp.m_tileSize > (gp.player().getWorldX() - gp.player().m_screenPosX) &&
+			m_worldX - gp.m_tileSize < (gp.player().getWorldX() + gp.player().m_screenPosX) &&
+			m_worldY + gp.m_tileSize > (gp.player().getWorldY() - gp.player().m_screenPosY) &&
+			m_worldY - gp.m_tileSize < (gp.player().getWorldY() + gp.player().m_screenPosX))
 		{
-			int screenX = m_worldX - (int)(gp.m_player.m_worldX + 0.5) + (int)(gp.m_player.m_screenPosX);
-			int screenY = m_worldY - (int)(gp.m_player.m_worldY + 0.5) + (int)(gp.m_player.m_screenPosY);
-			g2D.drawImage(m_image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+			int screenX = m_worldX - (int)(gp.player().getWorldX() + 0.5) + (int)(gp.player().m_screenPosX);
+			int screenY = m_worldY - (int)(gp.player().getWorldY() + 0.5) + (int)(gp.player().m_screenPosY);
+			g2D.drawImage(m_image, screenX, screenY, gp.m_tileSize, gp.m_tileSize, null);
 			m_isOnScreen = true;
 			return;
 		}

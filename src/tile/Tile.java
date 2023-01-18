@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 
 public class Tile
 {
-	public BufferedImage m_image;
-	public boolean m_hasCollision;
+	BufferedImage m_image;
+	private boolean m_hasCollision;
 
 	Tile()
 	{
@@ -16,4 +16,6 @@ public class Tile
 	{
 		m_hasCollision = hasCollision;
 	}
+
+	public boolean hasCollision() { return m_hasCollision; }
 }

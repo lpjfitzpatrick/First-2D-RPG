@@ -27,10 +27,10 @@ public class Player extends Entity
 		m_gp = gp;
 		m_keyHandler = keyHandler;
 		// Start position of the player relative to he top left corner of the screen
-		m_screenPosX = m_gp.screenWidth/2 - (m_gp.tileSize/2);
-		m_screenPosY = m_gp.screenHeight/2 - (m_gp.tileSize/2);
+		m_screenPosX = m_gp.screenWidth/2 - (m_gp.m_tileSize/2);
+		m_screenPosY = m_gp.screenHeight/2 - (m_gp.m_tileSize/2);
 
-		m_solidArea = new Rectangle(3*m_gp.tileSize/16, m_gp.tileSize/4, 5*m_gp.tileSize/8, 3*m_gp.tileSize/4 - m_gp.tileSize/32);
+		m_solidArea = new Rectangle(3*m_gp.m_tileSize/16, m_gp.m_tileSize/4, 5*m_gp.m_tileSize/8, 3*m_gp.m_tileSize/4 - m_gp.m_tileSize/32);
 		m_inventory = new ArrayList<InventoryObject>(10);
 
 		setDefaultValues();
@@ -40,8 +40,8 @@ public class Player extends Entity
 	public void setDefaultValues()
 	{
 		// Starting position of player relative to top left corner of world map
-		m_worldX = m_gp.tileSize * 23;
-		m_worldY = m_gp.tileSize * 21;
+		m_worldX = m_gp.m_tileSize * 23;
+		m_worldY = m_gp.m_tileSize * 21;
 		m_speed = 4;
 		m_spriteSwapInterval = 15;
 		computeDiagonalSpeed();
@@ -72,13 +72,13 @@ public class Player extends Entity
 	{
 		if (!m_keyHandler.isMoving()) return;
 
-		if (m_keyHandler.upPressed && !m_keyHandler.downPressed)
+		if (m_keyHandler.upPressed() && !m_keyHandler.downPressed())
 		{
-			if (m_keyHandler.leftPressed && !m_keyHandler.rightPressed)
+			if (m_keyHandler.leftPressed() && !m_keyHandler.rightPressed())
 			{
 				m_eDirection = Direction.eUpLeft;
 			}
-			else if (m_keyHandler.rightPressed && !m_keyHandler.leftPressed)
+			else if (m_keyHandler.rightPressed() && !m_keyHandler.leftPressed())
 			{
 				m_eDirection = Direction.eUpRight;
 			}
@@ -87,13 +87,13 @@ public class Player extends Entity
 				m_eDirection = Direction.eUp;
 			}
 		}
-		else if (m_keyHandler.downPressed && !m_keyHandler.upPressed)
+		else if (m_keyHandler.downPressed() && !m_keyHandler.upPressed())
 		{
-			if (m_keyHandler.leftPressed && !m_keyHandler.rightPressed)
+			if (m_keyHandler.leftPressed() && !m_keyHandler.rightPressed())
 			{
 				m_eDirection = Direction.eDownLeft;
 			}
-			else if (m_keyHandler.rightPressed && !m_keyHandler.leftPressed)
+			else if (m_keyHandler.rightPressed() && !m_keyHandler.leftPressed())
 			{
 				m_eDirection = Direction.eDownRight;
 			}
@@ -102,18 +102,18 @@ public class Player extends Entity
 				m_eDirection = Direction.eDown;
 			}
 		}
-		else if (m_keyHandler.leftPressed && !m_keyHandler.rightPressed)
+		else if (m_keyHandler.leftPressed() && !m_keyHandler.rightPressed())
 		{
 			m_eDirection = Direction.eLeft;
 		}
-		else if (m_keyHandler.rightPressed && !m_keyHandler.leftPressed)
+		else if (m_keyHandler.rightPressed() && !m_keyHandler.leftPressed())
 		{
 			m_eDirection = Direction.eRight;
 		}
 
 		m_isColliding = false;
-		m_gp.m_collisionDetector.checkTileCollision(this);
-		m_gp.m_collisionDetector.checkObjectCollision(this);
+		m_gp.collisionDetector().checkTileCollision(this);
+		m_gp.collisionDetector().checkObjectCollision(this);
 
 		if (!m_isColliding)
 		{
@@ -219,7 +219,7 @@ public class Player extends Entity
 			break;
 		}
 
-		g2D.drawImage(image, (int)(m_screenPosX + 0.5), (int)(m_screenPosY + 0.5), m_gp.tileSize, m_gp.tileSize, null);
+		g2D.drawImage(image, (int)(m_screenPosX + 0.5), (int)(m_screenPosY + 0.5), m_gp.m_tileSize, m_gp.m_tileSize, null);
 	}
 
 	private void computeDiagonalSpeed()

@@ -15,7 +15,7 @@ public class KeyObject extends InventoryObject
 	}
 
 	@Override
-	public void updateParams()
+	protected void updateParams()
 	{
 		m_name = "Key";
 		m_hasCollision = false;
