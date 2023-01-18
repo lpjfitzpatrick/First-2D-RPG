@@ -20,6 +20,7 @@ public class Player extends Entity
 	public final double m_screenPosX;
 	public final double m_screenPosY;
 
+	public GamePanel getGamePanel() { return m_gp; }
 	public ArrayList<InventoryObject> getInventory() { return m_inventory; }
 
 	public Player(GamePanel gp, KeyHandler keyHandler)

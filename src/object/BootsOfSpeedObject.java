@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 
 import entity.Entity;
 import entity.Player;
+import main.Sound.SoundByte;
 
 import java.io.IOException;
 import java.awt.Rectangle;
@@ -41,6 +42,7 @@ public class BootsOfSpeedObject extends InventoryObject
 				m_eItemState = ItemState.eInInventory;
 				// This should be handled by an equiptment frame onc we have that
 				((Player)entity).addToSpeed(m_speedBonus);
+				((Player)entity).getGamePanel().playSFX(SoundByte.ePowerup);
 			}
 		}
 	}

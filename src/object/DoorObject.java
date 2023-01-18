@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import java.awt.Rectangle;
 import entity.Entity;
 import entity.Player;
+import main.Sound.SoundByte;
 
 public class DoorObject extends OpenableObject
 {
@@ -40,6 +41,7 @@ public class DoorObject extends OpenableObject
 				if (item.m_name == "Key")
 				{
 					m_eObjectState = OpenableObjectState.eOpen;
+					player.getGamePanel().playSFX(SoundByte.eUnlock);
 					keyItem = item;
 					keyFound = true;
 					break;

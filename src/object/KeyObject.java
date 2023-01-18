@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 
 import entity.Entity;
 import entity.Player;
+import main.Sound.SoundByte;
 
 public class KeyObject extends InventoryObject
 {
@@ -36,6 +37,7 @@ public class KeyObject extends InventoryObject
 			if (((Player)entity).addToInventory(this))
 			{
 				m_eItemState = ItemState.eInInventory;
+				((Player)entity).getGamePanel().playSFX(SoundByte.eCoin);
 			}
 		}
 	}
