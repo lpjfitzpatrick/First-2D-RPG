@@ -10,18 +10,23 @@ import java.util.Iterator;
 import javax.swing.JPanel;
 
 import entity.Player;
+import main.Sound.SoundByte;
 import object.AbstractObject;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable
 {
+	// System classes
 	private KeyHandler m_keyHand = new KeyHandler();
 	private Thread m_gameThread;
 	private TileManager m_tileManager = new TileManager(this);
-	private Player m_player = new Player(this, m_keyHand);
 	private CollisionDetector m_collisionDetector = new CollisionDetector(this);
-	private ArrayList<AbstractObject> m_objects = new ArrayList<AbstractObject>(1000);
 	private AssetSetter m_assetSetter = new AssetSetter(this);
+	private Sound m_Sound = new Sound();
+
+	// Entity and objects
+	private Player m_player = new Player(this, m_keyHand);
+	private ArrayList<AbstractObject> m_objects = new ArrayList<AbstractObject>(1000);
 
 	// Screen Settings
 	private final int originalTileSize = 16; // 16x16 pixel tile size
@@ -57,6 +62,7 @@ public class GamePanel extends JPanel implements Runnable
 	public void setupGame()
 	{
 		m_assetSetter.setAssets();
+		playTheme(SoundByte.eMainTheme);
 	}
 
 	public void startGameThread()
@@ -137,5 +143,23 @@ public class GamePanel extends JPanel implements Runnable
 	public boolean addObjectToMap(AbstractObject object)
 	{
 		return m_objects.add(object);
+	}
+
+	void playTheme(SoundByte eSoundByte)
+	{
+		m_Sound.setSoundFile(eSoundByte);
+		m_Sound.play();
+		m_Sound.loop();
+	}
+
+	void stopTheme()
+	{
+		m_Sound.stop();
+	}
+
+	public void playSFX(SoundByte eSoundByte)
+	{
+		m_Sound.setSoundFile(eSoundByte);
+		m_Sound.play();
 	}
 }
