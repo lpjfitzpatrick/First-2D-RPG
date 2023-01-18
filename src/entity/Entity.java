@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class Entity {
 	public double m_worldX,m_worldY;
-	public double m_speed, m_diagonalSpeed;
+	double m_speed, m_diagonalSpeed;
 
 	public BufferedImage m_upNeutral, m_up1, m_up2, m_downNeutral, m_down1, m_down2;
 	public BufferedImage m_leftNeutral, m_left1, m_left2, m_rightNeutral, m_right1, m_right2;
@@ -29,6 +29,8 @@ public class Entity {
 		eDownLeft
 	}
 
+	public double getSpeed() { return m_speed; }
+	public double getDiagonalSpeed() { return m_diagonalSpeed; }
 	public Rectangle getSolidArea() { return m_solidArea; }
 
 	public BufferedImage walkingSprite(BufferedImage sprite1, BufferedImage sprite2)
