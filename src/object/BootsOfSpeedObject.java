@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 
 public class BootsOfSpeedObject extends InventoryObject
 {
-	public double m_speedBonus = 2;
+	private double m_speedBonus = 2;
 
 	public BootsOfSpeedObject(int tileSize, int coordX, int coordY, ItemState eItemState)
 	{
@@ -18,7 +18,7 @@ public class BootsOfSpeedObject extends InventoryObject
 	}
 
 	@Override
-	public void updateParams()
+	protected void updateParams()
 	{
 		m_name = "BootsOfSpeed";
 		m_hasCollision = false;

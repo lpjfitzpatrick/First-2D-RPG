@@ -4,16 +4,16 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Entity {
-	public double m_worldX,m_worldY;
+	double m_worldX,m_worldY;
 	double m_speed, m_diagonalSpeed;
 
-	public BufferedImage m_upNeutral, m_up1, m_up2, m_downNeutral, m_down1, m_down2;
-	public BufferedImage m_leftNeutral, m_left1, m_left2, m_rightNeutral, m_right1, m_right2;
-	public Direction m_eDirection;
+	BufferedImage m_upNeutral, m_up1, m_up2, m_downNeutral, m_down1, m_down2;
+	BufferedImage m_leftNeutral, m_left1, m_left2, m_rightNeutral, m_right1, m_right2;
+	Direction m_eDirection;
 
-	public int m_spriteNum = 1;
-	public int m_spriteFrameCount;
-	public int m_spriteSwapInterval;
+	int m_spriteNum = 1;
+	int m_spriteFrameCount;
+	int m_spriteSwapInterval;
 
 	Rectangle m_solidArea;
 	public boolean m_isColliding;
@@ -31,6 +31,9 @@ public class Entity {
 
 	public double getSpeed() { return m_speed; }
 	public double getDiagonalSpeed() { return m_diagonalSpeed; }
+	public double getWorldX() { return m_worldX; }
+	public double getWorldY() { return m_worldY; }
+	public Direction getDirection() { return m_eDirection; }
 	public Rectangle getSolidArea() { return m_solidArea; }
 
 	public BufferedImage walkingSprite(BufferedImage sprite1, BufferedImage sprite2)

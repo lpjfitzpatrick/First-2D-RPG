@@ -2,7 +2,7 @@ package object;
 
 public class InventoryObject extends AbstractObject
 {
-	ItemState m_eItemState;
+	protected ItemState m_eItemState;
 
 	public enum ItemState
 	{

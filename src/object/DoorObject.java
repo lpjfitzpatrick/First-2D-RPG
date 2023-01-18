@@ -14,7 +14,7 @@ public class DoorObject extends OpenableObject
 	}
 
 	@Override
-	public void updateParams()
+	protected void updateParams()
 	{
 		m_name = "Door";
 		m_hasCollision = true;
