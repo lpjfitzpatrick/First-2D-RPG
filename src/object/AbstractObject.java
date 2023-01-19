@@ -43,6 +43,7 @@ public class AbstractObject
 	public boolean hasCollision() { return m_hasCollision; }
 	public boolean isOnScreen() { return m_isOnScreen; }
 	public boolean removeFromGamePanel() { return m_removeFromGamePanel; }
+	public BufferedImage image() { return m_image;}
 
 	public void collisionAction(Entity entity) {}
 	public void update() {}
