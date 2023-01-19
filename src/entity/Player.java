@@ -46,7 +46,7 @@ public class Player extends Entity
 		m_worldX = m_gp.m_tileSize * 23;
 		m_worldY = m_gp.m_tileSize * 21;
 		m_speed = 4;
-		m_spriteSwapInterval = 15;
+		computeWalkPace();
 		computeDiagonalSpeed();
 		m_eDirection = Direction.eDown;
 	}
@@ -234,6 +234,12 @@ public class Player extends Entity
 		m_diagonalSpeed = reducedDistance*m_gp.FPS;
 	}
 
+	private void computeWalkPace()
+	{
+		// Default pace is 15 with FPS = 60 and speed = 4. Pace increases linearly with speed
+		m_spriteSwapInterval = m_gp.FPS - 41 - (int)(m_speed + 0.5);
+	}
+
 	public boolean addToInventory(InventoryObject item)
 	{
 		return m_inventory.add(item);
@@ -247,6 +253,7 @@ public class Player extends Entity
 	public void addToSpeed(double bonusSpeed)
 	{
 		m_speed += bonusSpeed;
+		computeWalkPace();
 		computeDiagonalSpeed();
 	}
 }
