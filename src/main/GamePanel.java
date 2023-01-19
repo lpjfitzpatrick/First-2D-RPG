@@ -22,7 +22,8 @@ public class GamePanel extends JPanel implements Runnable
 	private TileManager m_tileManager = new TileManager(this);
 	private CollisionDetector m_collisionDetector = new CollisionDetector(this);
 	private AssetSetter m_assetSetter = new AssetSetter(this);
-	private Sound m_Sound = new Sound();
+	private Sound m_OST = new Sound();
+	private Sound m_SFX = new Sound();
 
 	// Entity and objects
 	private Player m_player = new Player(this, m_keyHand);
@@ -147,19 +148,19 @@ public class GamePanel extends JPanel implements Runnable
 
 	void playTheme(SoundByte eSoundByte)
 	{
-		m_Sound.setSoundFile(eSoundByte);
-		m_Sound.play();
-		m_Sound.loop();
+		m_OST.setSoundFile(eSoundByte);
+		m_OST.play();
+		m_OST.loop();
 	}
 
 	void stopTheme()
 	{
-		m_Sound.stop();
+		m_OST.stop();
 	}
 
 	public void playSFX(SoundByte eSoundByte)
 	{
-		m_Sound.setSoundFile(eSoundByte);
-		m_Sound.play();
+		m_SFX.setSoundFile(eSoundByte);
+		m_SFX.play();
 	}
 }
