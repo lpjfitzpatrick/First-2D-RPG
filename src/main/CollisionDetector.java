@@ -118,79 +118,77 @@ public class CollisionDetector
 		{
 			if (obj != null && obj.isOnScreen())
 			{
-				Rectangle entitySolidArea = (Rectangle)entity.getSolidArea().clone();
-				entitySolidArea.x = (int)(entity.getWorldX() + 0.5) + entity.getSolidArea().x;
-				entitySolidArea.y = (int)(entity.getWorldY() + 0.5) + entity.getSolidArea().y;
+				entity.getSolidArea().x = (int)(entity.getWorldX() + 0.5) + entity.getSolidArea().x;
+				entity.getSolidArea().y = (int)(entity.getWorldY() + 0.5) + entity.getSolidArea().y;
 
-				Rectangle objectSolidArea = (Rectangle)obj.getSolidArea().clone();
-				objectSolidArea.x = obj.getWorldX() + obj.getSolidArea().x;
-				objectSolidArea.y = obj.getWorldY() + obj.getSolidArea().y;
+				obj.getSolidArea().x = obj.getWorldX() + obj.getDefaultSolidX();
+				obj.getSolidArea().y = obj.getWorldY() + obj.getDefaultSolidY();
 
 				switch (entity.getDirection())
 				{
 				case eUp:
-					entitySolidArea.y -= entity.getSpeed();
-					if (entitySolidArea.intersects(objectSolidArea))
+					entity.getSolidArea().y -= entity.getSpeed();
+					if (entity.getSolidArea().intersects(obj.getSolidArea()))
 					{
 						if (obj.hasCollision()) entity.m_isColliding = true;
 						obj.collisionAction(entity);
 					}
 					break;
 				case eUpLeft:
-					entitySolidArea.y -= entity.getDiagonalSpeed();
-					entitySolidArea.x -= entity.getDiagonalSpeed();
-					if (entitySolidArea.intersects(objectSolidArea))
+					entity.getSolidArea().y -= entity.getDiagonalSpeed();
+					entity.getSolidArea().x -= entity.getDiagonalSpeed();
+					if (entity.getSolidArea().intersects(obj.getSolidArea()))
 					{
 						if (obj.hasCollision()) entity.m_isColliding = true;
 						obj.collisionAction(entity);
 					}
 					break;
 				case eUpRight:
-					entitySolidArea.y -= entity.getDiagonalSpeed();
-					entitySolidArea.x += entity.getDiagonalSpeed();
-					if (entitySolidArea.intersects(objectSolidArea))
+					entity.getSolidArea().y -= entity.getDiagonalSpeed();
+					entity.getSolidArea().x += entity.getDiagonalSpeed();
+					if (entity.getSolidArea().intersects(obj.getSolidArea()))
 					{
 						if (obj.hasCollision()) entity.m_isColliding = true;
 						obj.collisionAction(entity);
 					}
 					break;
 				case eDown:
-					entitySolidArea.y += entity.getSpeed();
-					if (entitySolidArea.intersects(objectSolidArea))
+					entity.getSolidArea().y += entity.getSpeed();
+					if (entity.getSolidArea().intersects(obj.getSolidArea()))
 					{
 						if (obj.hasCollision()) entity.m_isColliding = true;
 						obj.collisionAction(entity);
 					}
 					break;
 				case eDownLeft:
-					entitySolidArea.y += entity.getDiagonalSpeed();
-					entitySolidArea.x -= entity.getDiagonalSpeed();
-					if (entitySolidArea.intersects(objectSolidArea))
+					entity.getSolidArea().y += entity.getDiagonalSpeed();
+					entity.getSolidArea().x -= entity.getDiagonalSpeed();
+					if (entity.getSolidArea().intersects(obj.getSolidArea()))
 					{
 						if (obj.hasCollision()) entity.m_isColliding = true;
 						obj.collisionAction(entity);
 					}
 					break;
 				case eDownRight:
-					entitySolidArea.y += entity.getDiagonalSpeed();
-					entitySolidArea.x += entity.getDiagonalSpeed();
-					if (entitySolidArea.intersects(objectSolidArea))
+					entity.getSolidArea().y += entity.getDiagonalSpeed();
+					entity.getSolidArea().x += entity.getDiagonalSpeed();
+					if (entity.getSolidArea().intersects(obj.getSolidArea()))
 					{
 						if (obj.hasCollision()) entity.m_isColliding = true;
 						obj.collisionAction(entity);
 					}
 					break;
 				case eLeft:
-					entitySolidArea.x -= entity.getSpeed();
-					if (entitySolidArea.intersects(objectSolidArea))
+					entity.getSolidArea().x -= entity.getSpeed();
+					if (entity.getSolidArea().intersects(obj.getSolidArea()))
 					{
 						if (obj.hasCollision()) entity.m_isColliding = true;
 						obj.collisionAction(entity);
 					}
 					break;
 				case eRight:
-					entitySolidArea.x += entity.getSpeed();
-					if (entitySolidArea.intersects(objectSolidArea))
+					entity.getSolidArea().x += entity.getSpeed();
+					if (entity.getSolidArea().intersects(obj.getSolidArea()))
 					{
 						if (obj.hasCollision()) entity.m_isColliding = true;
 						obj.collisionAction(entity);
@@ -199,6 +197,10 @@ public class CollisionDetector
 				default:
 					break;
 				}
+				entity.getSolidArea().x = entity.getDefaultSolidX();
+				entity.getSolidArea().y = entity.getDefaultSolidY();
+				obj.getSolidArea().x = obj.getDefaultSolidX();
+				obj.getSolidArea().y = obj.getDefaultSolidY();
 			}
 		}
 	}
