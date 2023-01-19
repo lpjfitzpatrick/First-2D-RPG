@@ -19,6 +19,7 @@ public class AbstractObject
 	boolean m_removeFromGamePanel = false;
 
 	Rectangle m_solidArea;
+	protected int m_defaultSolidX, m_defaultSolidY;
 
 	AbstractObject() {}
 
@@ -37,6 +38,8 @@ public class AbstractObject
 	public int getCoordX() { return m_coordX; }
 	public int getCoordY() { return m_coordY; }
 	public Rectangle getSolidArea() { return m_solidArea; }
+	public int getDefaultSolidX() { return m_defaultSolidX; }
+	public int getDefaultSolidY() { return m_defaultSolidY; }
 	public boolean hasCollision() { return m_hasCollision; }
 	public boolean isOnScreen() { return m_isOnScreen; }
 	public boolean removeFromGamePanel() { return m_removeFromGamePanel; }
