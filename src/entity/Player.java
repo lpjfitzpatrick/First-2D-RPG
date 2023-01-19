@@ -16,6 +16,7 @@ public class Player extends Entity
 	GamePanel m_gp;
 	KeyHandler m_keyHandler;
 	ArrayList<InventoryObject> m_inventory;
+	public final int m_inventoryCapacity = 10;
 
 	public final double m_screenPosX;
 	public final double m_screenPosY;
@@ -34,7 +35,7 @@ public class Player extends Entity
 		m_defaultSolidX = 3*m_gp.m_tileSize/16;
 		m_defaultSolidY = m_gp.m_tileSize/4;
 		m_solidArea = new Rectangle(m_defaultSolidX, m_defaultSolidY, 5*m_gp.m_tileSize/8, 3*m_gp.m_tileSize/4 - m_gp.m_tileSize/32);
-		m_inventory = new ArrayList<InventoryObject>(10);
+		m_inventory = new ArrayList<InventoryObject>(m_inventoryCapacity);
 
 		setDefaultValues();
 		getPlayerImage();

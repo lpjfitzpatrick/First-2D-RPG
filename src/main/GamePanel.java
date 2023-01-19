@@ -13,6 +13,7 @@ import entity.Player;
 import main.Sound.SoundByte;
 import object.AbstractObject;
 import tile.TileManager;
+import ui.InventoryPanel;
 
 public class GamePanel extends JPanel implements Runnable
 {
@@ -24,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable
 	private AssetSetter m_assetSetter = new AssetSetter(this);
 	private Sound m_OST = new Sound();
 	private Sound m_SFX = new Sound();
+	private InventoryPanel m_InventoryPanel = new InventoryPanel(this);
 
 	// Entity and objects
 	private Player m_player = new Player(this, m_keyHand);
@@ -136,6 +138,8 @@ public class GamePanel extends JPanel implements Runnable
 				obj.draw(g2D, this);
 		}
 		m_player.draw(g2D);
+		if (m_keyHand.m_BPressed)
+			m_InventoryPanel.draw(g2D);
 
 		// For freeing up memory
 		g2D.dispose();
