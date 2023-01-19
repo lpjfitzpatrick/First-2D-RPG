@@ -29,7 +29,9 @@ public class BootsOfSpeedObject extends InventoryObject
 			e.printStackTrace();
 		}
 
-		m_solidArea = new Rectangle(m_tileSize/8, m_tileSize/8, 7*m_tileSize/8, 7*m_tileSize/8);
+		m_defaultSolidX = m_tileSize/8;
+		m_defaultSolidY = m_tileSize/8;
+		m_solidArea = new Rectangle(m_defaultSolidX, m_defaultSolidY, 7*m_tileSize/8, 7*m_tileSize/8);
 	}
 
 	@Override

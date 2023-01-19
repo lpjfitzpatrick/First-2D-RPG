@@ -26,7 +26,9 @@ public class KeyObject extends InventoryObject
 			e.printStackTrace();
 		}
 
-		m_solidArea = new Rectangle(0, 0, m_tileSize, m_tileSize);
+		m_defaultSolidX = 0;
+		m_defaultSolidY = 0;
+		m_solidArea = new Rectangle(m_defaultSolidX, m_defaultSolidY, m_tileSize, m_tileSize);
 	}
 
 	@Override

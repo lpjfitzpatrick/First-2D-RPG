@@ -16,6 +16,8 @@ public class Entity {
 	int m_spriteSwapInterval;
 
 	Rectangle m_solidArea;
+	int m_defaultSolidX;
+	int m_defaultSolidY;
 	public boolean m_isColliding;
 
 	public enum Direction {
@@ -35,6 +37,8 @@ public class Entity {
 	public double getWorldY() { return m_worldY; }
 	public Direction getDirection() { return m_eDirection; }
 	public Rectangle getSolidArea() { return m_solidArea; }
+	public int getDefaultSolidX() { return m_defaultSolidX;	}
+	public int getDefaultSolidY() { return m_defaultSolidY; }
 
 	public BufferedImage walkingSprite(BufferedImage sprite1, BufferedImage sprite2)
 	{
