@@ -3,8 +3,6 @@ package main;
 import entity.Entity;
 import object.AbstractObject;
 
-import java.awt.Rectangle;
-
 public class CollisionDetector
 {
 	private GamePanel m_gp;
