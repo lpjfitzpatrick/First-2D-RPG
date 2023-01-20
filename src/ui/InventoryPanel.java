@@ -7,7 +7,7 @@ import main.GamePanel;
 
 public class InventoryPanel extends AbstractUI
 {
-	Color m_backgroundColor = new Color((int)64, (int)64, (int)64, 200);
+	Color m_backgroundColor = new Color(64, 64, 64, 200);
 
 	public InventoryPanel(GamePanel gp)
 	{
