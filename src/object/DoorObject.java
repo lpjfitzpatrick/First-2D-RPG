@@ -44,12 +44,14 @@ public class DoorObject extends OpenableObject
 				{
 					m_eObjectState = OpenableObjectState.eOpen;
 					player.getGamePanel().playSFX(SoundByte.eUnlock);
+					player.getGamePanel().notifyLogMessageListener("You unlocked the door with your key.");
 					keyItem = item;
 					keyFound = true;
 					break;
 				}
 			}
 			if (keyFound) player.removeFromInventory(keyItem);
+			else player.getGamePanel().notifyLogMessageListener("The door appears to be locked.");
 		}
 	}
 

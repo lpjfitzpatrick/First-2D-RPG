@@ -39,12 +39,14 @@ public class BootsOfSpeedObject extends InventoryObject
 	{
 		if (entity instanceof Player)
 		{
-			if (((Player)entity).addToInventory(this))
+			Player player = (Player)entity;
+			if (player.addToInventory(this))
 			{
 				m_eItemState = ItemState.eInInventory;
 				// This should be handled by an equiptment frame onc we have that
-				((Player)entity).addToSpeed(m_speedBonus);
-				((Player)entity).getGamePanel().playSFX(SoundByte.ePowerup);
+				player.addToSpeed(m_speedBonus);
+				player.getGamePanel().playSFX(SoundByte.ePowerup);
+				player.getGamePanel().notifyLogMessageListener("You found boots of speed.");
 			}
 		}
 	}

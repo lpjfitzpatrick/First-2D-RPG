@@ -14,6 +14,7 @@ import main.Sound.SoundByte;
 import object.AbstractObject;
 import tile.TileManager;
 import ui.InventoryPanel;
+import ui.LogMessage;
 
 public class GamePanel extends JPanel implements Runnable
 {
@@ -26,6 +27,10 @@ public class GamePanel extends JPanel implements Runnable
 	private Sound m_OST = new Sound();
 	private Sound m_SFX = new Sound();
 	private InventoryPanel m_InventoryPanel = new InventoryPanel(this);
+	private LogMessage m_LogMessage = new LogMessage(this);
+
+	// Callbacks
+	private LogMessageListener m_LogMessageListener;
 
 	// Entity and objects
 	private Player m_player = new Player(this, m_keyHand);
@@ -140,6 +145,7 @@ public class GamePanel extends JPanel implements Runnable
 		m_player.draw(g2D);
 		if (m_keyHand.m_BPressed)
 			m_InventoryPanel.draw(g2D);
+		m_LogMessage.draw(g2D);
 
 		// For freeing up memory
 		g2D.dispose();
@@ -166,5 +172,15 @@ public class GamePanel extends JPanel implements Runnable
 	{
 		m_SFX.setSoundFile(eSoundByte);
 		m_SFX.play();
+	}
+
+	public void setLogMessageListener(LogMessageListener listener)
+	{
+		m_LogMessageListener = listener;
+	}
+
+	public void notifyLogMessageListener(String message)
+	{
+		m_LogMessageListener.receiveMessage(message);
 	}
 }
