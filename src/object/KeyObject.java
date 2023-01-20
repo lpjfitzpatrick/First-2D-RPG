@@ -41,7 +41,7 @@ public class KeyObject extends InventoryObject
 			{
 				m_eItemState = ItemState.eInInventory;
 				player.getGamePanel().playSFX(SoundByte.eCoin);
-				player.getGamePanel().notifyLogMessageListener("You found a key.aaaa aaaa aaaa aaaa aaabbbbbbbbbb");
+				player.getGamePanel().notifyLogMessageListener("You found a key.");
 			}
 		}
 	}
