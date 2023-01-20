@@ -36,10 +36,12 @@ public class KeyObject extends InventoryObject
 	{
 		if (entity instanceof Player)
 		{
-			if (((Player)entity).addToInventory(this))
+			Player player = (Player)entity;
+			if (player.addToInventory(this))
 			{
 				m_eItemState = ItemState.eInInventory;
-				((Player)entity).getGamePanel().playSFX(SoundByte.eCoin);
+				player.getGamePanel().playSFX(SoundByte.eCoin);
+				player.getGamePanel().notifyLogMessageListener("You found a key.aaaa aaaa aaaa aaaa aaabbbbbbbbbb");
 			}
 		}
 	}
