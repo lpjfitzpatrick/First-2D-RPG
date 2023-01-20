@@ -14,7 +14,7 @@ public class LogMessage extends AbstractUI implements LogMessageListener
 	final int MESSAGE_WINDOW_LENGTH = 7*m_gp.m_tileSize;
 	Font m_arial_23i = new Font("Arial", Font.ITALIC, 23);
 	Color m_backgroundColor = new Color(192, 192, 192, 200);
-	float alpha = 1.0f;
+	int m_messageCount = 0;
 
 	public LogMessage(GamePanel gp)
 	{
@@ -26,6 +26,7 @@ public class LogMessage extends AbstractUI implements LogMessageListener
 	public void receiveMessage(String message)
 	{
 		m_message = message;
+		m_messageCount = 0;
 	}
 
 	public void draw(Graphics2D g2D)
@@ -56,6 +57,13 @@ public class LogMessage extends AbstractUI implements LogMessageListener
 			if (secondHalf != null)
 			{
 				g2D.drawString(secondHalf, m_gp.m_tileSize/2, 11*m_gp.m_tileSize + m_gp.m_tileSize/5 + m_arial_23i.getSize());
+			}
+
+			m_messageCount++;
+			if (m_messageCount >= m_gp.FPS*2)
+			{
+				m_message = null;
+				m_messageCount = 0;
 			}
 		}
 	}
