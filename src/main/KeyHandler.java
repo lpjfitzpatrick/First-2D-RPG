@@ -7,6 +7,8 @@ public class KeyHandler implements KeyListener
 {
 	private boolean m_upPressed, m_downPressed, m_leftPressed, m_rightPressed;
 	public boolean m_BPressed = false;
+	// Debug
+	public boolean m_debug = false;
 
 	public boolean upPressed() { return m_upPressed; }
 	public boolean downPressed() { return m_downPressed; }
@@ -80,6 +82,17 @@ public class KeyHandler implements KeyListener
 			else
 			{
 				m_BPressed = false;
+			}
+		}
+		if (code == KeyEvent.VK_NUMPAD0)
+		{
+			if (!m_debug)
+			{
+				m_debug = true;
+			}
+			else
+			{
+				m_debug = false;
 			}
 		}
 	}
