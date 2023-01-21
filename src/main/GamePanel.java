@@ -131,10 +131,14 @@ public class GamePanel extends JPanel implements Runnable
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-
-		// Make it a graphics 2D class to get access to more stuff (why not just start with a 2D graphics?)
 		Graphics2D g2D = (Graphics2D)g;
 
+		//DEBUG
+		long drawStart = 0;
+		if (m_keyHand.m_debug)
+		{
+			drawStart = System.nanoTime();
+		}
 		// Draw tiles before player else tiles will hide player
 		m_tileManager.draw(g2D);
 		for (AbstractObject obj:m_objects)
@@ -147,6 +151,12 @@ public class GamePanel extends JPanel implements Runnable
 			m_InventoryPanel.draw(g2D);
 		m_LogMessage.draw(g2D);
 
+		if (m_keyHand.m_debug)
+		{
+			long drawEnd = System.nanoTime();
+			long passed = drawEnd - drawStart;
+			System.out.print("Draw time: "+passed+"\n");
+		}
 		// For freeing up memory
 		g2D.dispose();
 	}
