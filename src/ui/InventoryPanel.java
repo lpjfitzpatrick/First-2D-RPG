@@ -29,7 +29,7 @@ public class InventoryPanel extends AbstractUI
 			{
 				g2D.drawImage(
 					m_gp.player().getInventory().get(i-1).image(), i*m_gp.screenHeight/25 + (i-1)*m_gp.m_tileSize/2,
-					m_gp.screenWidth/25, m_gp.m_tileSize, m_gp.m_tileSize, null);
+					m_gp.screenWidth/25, null);
 			}
 		}
 	}

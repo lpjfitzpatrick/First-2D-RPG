@@ -21,6 +21,7 @@ public class DoorObject extends OpenableObject
 		m_hasCollision = true;
 		try {
 			m_image = ImageIO.read(getClass().getResourceAsStream("../res/objects/door.png"));
+			m_image = uTool.scaleImage(m_image, m_tileSize, m_tileSize);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

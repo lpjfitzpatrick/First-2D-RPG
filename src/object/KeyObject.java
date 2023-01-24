@@ -22,6 +22,7 @@ public class KeyObject extends InventoryObject
 		m_hasCollision = false;
 		try {
 			m_image = ImageIO.read(getClass().getResourceAsStream("../res/objects/key.png"));
+			m_image = uTool.scaleImage(m_image, m_tileSize, m_tileSize);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

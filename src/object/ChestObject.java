@@ -18,6 +18,7 @@ public class ChestObject extends AbstractObject
 		m_hasCollision = true;
 		try {
 			m_image = ImageIO.read(getClass().getResourceAsStream("../res/objects/Chest.png"));
+			m_image = uTool.scaleImage(m_image, m_tileSize, m_tileSize);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
