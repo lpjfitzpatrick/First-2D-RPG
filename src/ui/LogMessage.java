@@ -23,6 +23,7 @@ public class LogMessage extends AbstractUI implements LogMessageListener
 		m_gp.setLogMessageListener(this);
 	}
 
+	@Override
 	public void receiveMessage(String message)
 	{
 		m_message = message;
