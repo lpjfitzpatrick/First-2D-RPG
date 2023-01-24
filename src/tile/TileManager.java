@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.UtilityTool;
 
 public class TileManager
 {
@@ -31,33 +32,30 @@ public class TileManager
 
 	public void getTileImage()
 	{
+		setup(0, "TestGrass001.png", false);
+		setup(1, "TestGrass002.png", false);
+		setup(2, "TestWall001.png", true);
+		setup(3, "TestWater001.png", true);
+		setup(4, "TestFlower001.png", true);
+		setup(5, "TestSand001.png", false);
+		setup(6, "TestEarth001.png", false);
+	}
+
+	private void setup(int index, String imageName, boolean collision)
+	{
+		UtilityTool	uTool = new UtilityTool();
+
 		try {
-			m_aTiles[0] = new Tile();
-			m_aTiles[0].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestGrass001.png"));
+			m_aTiles[index] = new Tile(collision);
+			m_aTiles[index].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/"+imageName));
+			m_aTiles[index].m_image = uTool.scaleImage(m_aTiles[index].m_image, m_gp.m_tileSize, m_gp.m_tileSize);
 
-			m_aTiles[1] = new Tile();
-			m_aTiles[1].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestGrass002.png"));
-
-			m_aTiles[2] = new Tile(true);
-			m_aTiles[2].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestWall001.png"));
-
-			m_aTiles[3] = new Tile(true);
-			m_aTiles[3].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestWater001.png"));
-
-			m_aTiles[4] = new Tile(true);
-			m_aTiles[4].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestFlower001.png"));
-
-			m_aTiles[5] = new Tile();
-			m_aTiles[5].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestSand001.png"));
-
-			m_aTiles[6] = new Tile();
-			m_aTiles[6].m_image = ImageIO.read(getClass().getResourceAsStream("../res/tiles/TestEarth001.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public boolean loadMap(String filePath)
+	private boolean loadMap(String filePath)
 	{
 		boolean ret = false;
 		try {
@@ -102,7 +100,7 @@ public class TileManager
 				{
 					int screenX = worldTilePosX - (int)(m_gp.player().getWorldX() + 0.5) + (int)(m_gp.player().m_screenPosX);
 					int screenY = worldTilePosY - (int)(m_gp.player().getWorldY() + 0.5) + (int)(m_gp.player().m_screenPosY);
-					g2D.drawImage(m_aTiles[m_mapTileNums[worldCol][worldRow]].m_image, screenX, screenY, m_gp.m_tileSize, m_gp.m_tileSize, null);
+					g2D.drawImage(m_aTiles[m_mapTileNums[worldCol][worldRow]].m_image, screenX, screenY, null);
 				}
 				worldRow++;
 			}

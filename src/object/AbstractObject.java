@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 
 import entity.Entity;
 import main.GamePanel;
+import main.UtilityTool;
 
 public class AbstractObject
 {
@@ -20,6 +21,8 @@ public class AbstractObject
 
 	Rectangle m_solidArea;
 	protected int m_defaultSolidX, m_defaultSolidY;
+
+	UtilityTool uTool = new UtilityTool();
 
 	AbstractObject() {}
 
@@ -59,7 +62,7 @@ public class AbstractObject
 		{
 			int screenX = m_worldX - (int)(gp.player().getWorldX() + 0.5) + (int)(gp.player().m_screenPosX);
 			int screenY = m_worldY - (int)(gp.player().getWorldY() + 0.5) + (int)(gp.player().m_screenPosY);
-			g2D.drawImage(m_image, screenX, screenY, gp.m_tileSize, gp.m_tileSize, null);
+			g2D.drawImage(m_image, screenX, screenY, null);
 			m_isOnScreen = true;
 			return;
 		}

@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 import object.InventoryObject;
 
 public class Player extends Entity
@@ -54,22 +55,32 @@ public class Player extends Entity
 
 	public void getPlayerImage()
 	{
+		m_upNeutral = setup("character_up_neutral.png");
+		m_up1 = setup("character_up1.png");
+		m_up2 = setup("character_up2.png");
+		m_downNeutral = setup("character_down_neutral.png");
+		m_down1 = setup("character_down1.png");
+		m_down2 = setup("character_down2.png");
+		m_leftNeutral = setup("character_left_neutral.png");
+		m_left1 = setup("character_left1.png");
+		m_left2 = setup("character_left2.png");
+		m_rightNeutral = setup("character_right_neutral.png");
+		m_right1 = setup("character_right1.png");
+		m_right2 = setup("character_right2.png");
+	}
+
+	private BufferedImage setup(String imageName)
+	{
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage image = null;
+
 		try {
-			m_upNeutral = ImageIO.read(getClass().getResourceAsStream("../res/player/character_up_neutral.png"));
-			m_up1 = ImageIO.read(getClass().getResourceAsStream("../res/player/character_up1.png"));
-			m_up2 = ImageIO.read(getClass().getResourceAsStream("../res/player/character_up2.png"));
-			m_downNeutral = ImageIO.read(getClass().getResourceAsStream("../res/player/character_down_neutral.png"));
-			m_down1 = ImageIO.read(getClass().getResourceAsStream("../res/player/character_down1.png"));
-			m_down2 = ImageIO.read(getClass().getResourceAsStream("../res/player/character_down2.png"));
-			m_leftNeutral = ImageIO.read(getClass().getResourceAsStream("../res/player/character_left_neutral.png"));
-			m_left1 = ImageIO.read(getClass().getResourceAsStream("../res/player/character_left1.png"));
-			m_left2 = ImageIO.read(getClass().getResourceAsStream("../res/player/character_left2.png"));
-			m_rightNeutral = ImageIO.read(getClass().getResourceAsStream("../res/player/character_right_neutral.png"));
-			m_right1 = ImageIO.read(getClass().getResourceAsStream("../res/player/character_right1.png"));
-			m_right2 = ImageIO.read(getClass().getResourceAsStream("../res/player/character_right2.png"));
+			image = ImageIO.read(getClass().getResourceAsStream("../res/player/"+imageName));
+			image = uTool.scaleImage(image, m_gp.m_tileSize, m_gp.m_tileSize);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return image;
 	}
 
 	public void update()
@@ -223,7 +234,7 @@ public class Player extends Entity
 			break;
 		}
 
-		g2D.drawImage(image, (int)(m_screenPosX + 0.5), (int)(m_screenPosY + 0.5), m_gp.m_tileSize, m_gp.m_tileSize, null);
+		g2D.drawImage(image, (int)(m_screenPosX + 0.5), (int)(m_screenPosY + 0.5), null);
 	}
 
 	private void computeDiagonalSpeed()
