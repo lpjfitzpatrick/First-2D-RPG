@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JPanel;
 
@@ -18,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable
 	public Player m_player = new Player(this, m_keyHand);
 	TileManager m_tileManager = new TileManager(this);
 	public CollisionDetector m_collisionDetector = new CollisionDetector(this);
-	public AbstractObject m_objects[] = new AbstractObject[10]; // Total number of objects that can be displayed at once
+	ArrayList<AbstractObject> m_objects = new ArrayList<AbstractObject>(1000);
 	public AssetSetter m_assetSetter = new AssetSetter(this);
 
 	// Screen Settings
@@ -96,10 +98,15 @@ public class GamePanel extends JPanel implements Runnable
 	public void update ()
 	{
 		m_player.update();
-		for (AbstractObject obj:m_objects)
+		Iterator<AbstractObject> it = m_objects.iterator();
+		while (it.hasNext())
 		{
-			if (obj != null)
+			AbstractObject obj = it.next();
+			if (obj != null && obj.isOnScreen())
+			{
 				obj.update();
+				if (obj.removeFromGamePanel()) it.remove();
+			}
 		}
 	}
 
@@ -121,5 +128,10 @@ public class GamePanel extends JPanel implements Runnable
 
 		// For freeing up memory
 		g2D.dispose();
+	}
+
+	public boolean addObjectToMap(AbstractObject object)
+	{
+		return m_objects.add(object);
 	}
 }

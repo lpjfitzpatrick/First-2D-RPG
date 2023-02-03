@@ -3,18 +3,24 @@ package entity;
 import java.awt.Rectangle;
 import java.awt.Graphics2D;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.InventoryObject;
 
-public class Player extends Entity{
+public class Player extends Entity
+{
 	GamePanel m_gp;
 	KeyHandler m_keyHandler;
+	ArrayList<InventoryObject> m_inventory;
 
 	public final double m_screenPosX;
 	public final double m_screenPosY;
+
+	public ArrayList<InventoryObject> getInventory() { return m_inventory; }
 
 	public Player(GamePanel gp, KeyHandler keyHandler)
 	{
@@ -25,6 +31,7 @@ public class Player extends Entity{
 		m_screenPosY = m_gp.screenHeight/2 - (m_gp.tileSize/2);
 
 		m_solidArea = new Rectangle(3*m_gp.tileSize/16, m_gp.tileSize/4, 5*m_gp.tileSize/8, 3*m_gp.tileSize/4 - m_gp.tileSize/32);
+		m_inventory = new ArrayList<InventoryObject>(10);
 
 		setDefaultValues();
 		getPlayerImage();
@@ -106,6 +113,7 @@ public class Player extends Entity{
 
 		m_isColliding = false;
 		m_gp.m_collisionDetector.checkTileCollision(this);
+		m_gp.m_collisionDetector.checkObjectCollision(this);
 
 		if (!m_isColliding)
 		{
@@ -221,5 +229,21 @@ public class Player extends Entity{
 		double pixelsPerFrame = m_speed/m_gp.FPS;
 		double reducedDistance = pixelsPerFrame/Math.sqrt(2);
 		m_diagonalSpeed = reducedDistance*m_gp.FPS;
+	}
+
+	public boolean addToInventory(InventoryObject item)
+	{
+		return m_inventory.add(item);
+	}
+
+	public boolean removeFromInventory(InventoryObject item)
+	{
+		return m_inventory.remove(item);
+	}
+
+	public void addToSpeed(double bonusSpeed)
+	{
+		m_speed += bonusSpeed;
+		computeDiagonalSpeed();
 	}
 }
