@@ -16,3 +16,6 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+
+This game is based off a tutorial series on YouTube by [RyiSnow](https://www.youtube.com/watch?v=om59cwR7psI&list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq). There are a hefty amount of differences wtitin the first 10 videos but it is a good foundation to learn some Java.
